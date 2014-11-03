@@ -57,3 +57,12 @@ end
 #    not_if "ls #{node[:elasticsearch][:path][:plugins]}/http-basic"
 #  end
 #end
+
+# Install AWS plugin (for snapshots)
+bash "install_aws_plugin" do
+  user "root"
+  cwd "#{node[:elasticsearch][:home_dir]}"
+  code <<-EOH
+    bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.4.0
+  EOH
+end
