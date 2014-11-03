@@ -63,6 +63,6 @@ bash "install_aws_plugin" do
   user "root"
   cwd "#{node[:elasticsearch][:home_dir]}"
   code <<-EOH
-    bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.4.0
+    bin/plugin -install elasticsearch/elasticsearch-cloud-aws/#{node[:elasticsearch][:aws_plugin][:version]}
   EOH
 end
