@@ -35,7 +35,7 @@ link "#{node[:elasticsearch][:home_dir]}" do
   not_if "ls #{node[:elasticsearch][:home_dir]}"
 end
 
-# Plugins don't need to be installed on ES 1.4.0Beta1
+# Plugins don't need to be installed on ES 1.4.0+
 #if !!node[:elasticsearch][:basic_auth]
 #  directory node[:elasticsearch][:path][:plugins] do
 #    owner node[:elasticsearch][:user]
@@ -63,6 +63,7 @@ bash "install_aws_plugin" do
   user "root"
   cwd "#{node[:elasticsearch][:home_dir]}"
   code <<-EOH
+    bin/plugin -remove elasticsearch/elasticsearch-cloud-aws/#{node[:elasticsearch][:aws_plugin][:version]}
     bin/plugin -install elasticsearch/elasticsearch-cloud-aws/#{node[:elasticsearch][:aws_plugin][:version]}
   EOH
 end
