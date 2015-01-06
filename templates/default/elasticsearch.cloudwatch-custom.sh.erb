@@ -1,2 +1,4 @@
 #!/bin/sh
+export AWS_ACCESS_KEY_ID=<%= node[:s3][:access_key] %>
+export AWS_SECRET_ACCESS_KEY=<%= node[:s3][:secret_key] %>
 aws cloudwatch put-metric-data --region <%= node[:opsworks][:instance][:region] %> --namespace "ElasticSearch-<%= node.elasticsearch[:cluster][:name] %>" --metric-name "number_of_data_nodes" --unit "Count" --value "`curl -s 'http://localhost:9200/_cluster/health' | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["number_of_data_nodes"]'`"
