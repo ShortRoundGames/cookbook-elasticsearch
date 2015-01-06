@@ -4,8 +4,9 @@ export AWS_SECRET_ACCESS_KEY=<%= node[:s3][:secret_key] %>
 
 # Constants
 KILO=1024
-DISK_SPACE_UNITS="gigabytes"
-DISK_SPACE_UNIT_DIV=1
+GIGA=1073741824
+DISK_SPACE_UNITS="Gigabytes"
+DISK_SPACE_UNIT_DIV=$GIGA
 DISK_PATH="/data"
 
 # Find disk space available
