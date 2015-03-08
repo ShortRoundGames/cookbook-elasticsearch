@@ -32,7 +32,6 @@ end
 # Create Symlink
 link "#{node[:elasticsearch][:home_dir]}" do
   to "#{node[:elasticsearch][:home_dir]}-#{node[:elasticsearch][:version]}"
-  not_if "ls #{node[:elasticsearch][:home_dir]}"
 end
 
 # Plugins don't need to be installed on ES 1.4.0+
