@@ -29,10 +29,10 @@ template "elasticsearch.init" do
 end
 
 # services
-execute "reload-monit" do
-  command "monit reload"
-  action :nothing
-end
+#execute "reload-monit" do
+#  command "monit reload"
+#  action :nothing
+#end
 
 # Configration
 instances = node[:opsworks][:layers][:elasticsearch][:instances]
@@ -48,10 +48,17 @@ template "elasticsearch.yml" do
 end
 
 # Monitoring by Monit
-template "elasticsearch.monitrc" do
-  path   "/etc/monit.d/elasticsearch.monitrc"
-  source "elasticsearch.monitrc.erb"
-  owner 'root'
-  mode 0755
-  notifies :run, resources(:execute => "reload-monit")
+#template "elasticsearch.monitrc" do
+#  path   "/etc/monit.d/elasticsearch.monitrc"
+#  source "elasticsearch.monitrc.erb"
+#  owner 'root'
+#  mode 0755
+#  notifies :run, resources(:execute => "reload-monit")
+#end
+
+# We need to install a pill so we can run through bluepill
+template "#{node['elasticsearch']['dir']}/elasticsearch.pill" do
+  source 'elasticsearch.pill.erb'
+  mode   '0644'
+  owner  'root'
 end

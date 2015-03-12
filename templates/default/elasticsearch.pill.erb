@@ -1,0 +1,13 @@
+Bluepill.application('elasticsearch',
+                     :log_file => '/tmp/elasticsearch.log') do |app|
+  app.process('elasticsearch') do |process|
+    process.working_dir = '<%= node['elasticsearch']['home_dir'] %>'
+    process.pid_file = "/tmp/elasticsearch.pid"
+    process.start_command = '<%= node['elasticsearch']['home_dir'] %>/bin/elasticsearch'
+    process.stop_command = 'kill -SIGTERM {{PID}}'
+    process.restart_command = 'kill -SIGUSR2 {{PID}}'
+    process.daemonize = true
+    process.stdout = "/var/log/elasticsearch_stdout.log"
+    process.stderr = "/var/log/elasticsearch_stderr.log"
+  end
+end
