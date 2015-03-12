@@ -66,3 +66,10 @@ bash "install_aws_plugin" do
     bin/plugin -install elasticsearch/elasticsearch-cloud-aws/#{node[:elasticsearch][:aws_plugin][:version]}
   EOH
 end
+
+# We need to install a pill so we can run through bluepill
+template "#{node['elasticsearch']['dir']}/elasticsearch.pill" do
+  source 'elasticsearch.pill.erb'
+  mode   '0644'
+  owner  'root'
+end
