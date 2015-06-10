@@ -67,6 +67,16 @@ bash "install_aws_plugin" do
   EOH
 end
 
+# Install Knapsack plugin (for importing/exporting compressed chunks of data)
+bash "install_aws_plugin" do
+  user "root"
+  cwd "#{node[:elasticsearch][:home_dir]}"
+  code <<-EOH
+    bin/plugin -remove knapsack
+    bin/plugin -install knapsack -url http://xbib.org/repository/org/xbib/elasticsearch/plugin/elasticsearch-knapsack/#{node[:elasticsearch][:knapsack_plugin][:version]}/elasticsearch-knapsack-#{node[:elasticsearch][:knapsack_plugin][:version]}-plugin.zip
+  EOH
+end
+
 # We need to install a pill so we can run through bluepill
 template "#{node['elasticsearch']['dir']}/elasticsearch.pill" do
   source 'elasticsearch.pill.erb'
