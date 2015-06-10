@@ -77,6 +77,12 @@ bash "install_aws_plugin" do
   EOH
 end
 
+# Create directory to export the knapsack archives to
+directory "#{node['elasticsearch']['dir']}/knapsacks" do
+  owner node[:elasticsearch][:user]
+  group node[:elasticsearch][:user]
+end
+
 # We need to install a pill so we can run through bluepill
 template "#{node['elasticsearch']['dir']}/elasticsearch.pill" do
   source 'elasticsearch.pill.erb'
