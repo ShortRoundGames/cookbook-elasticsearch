@@ -6,7 +6,7 @@ Bluepill.application('elasticsearch',
     process.start_command = '<%= node['elasticsearch']['home_dir'] %>/bin/elasticsearch'
     process.stop_command = 'kill -SIGTERM {{PID}}'
     process.daemonize = true
-    process.stdout = "/var/log/elasticsearch_stdout.log"
-    process.stderr = "/var/log/elasticsearch_stderr.log"
+    process.stdout = "/data/log/elasticsearch_stdout.log"
+    process.stderr = "/data/log/elasticsearch_stderr.log"
   end
 end
