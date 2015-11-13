@@ -68,7 +68,7 @@ bash "install_aws_plugin" do
 end
 
 # Install Knapsack plugin (for importing/exporting compressed chunks of data)
-bash "install_aws_plugin" do
+bash "install_knapsack_plugin" do
   user "root"
   cwd "#{node[:elasticsearch][:home_dir]}"
   code <<-EOH
