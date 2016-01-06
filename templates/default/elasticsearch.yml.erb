@@ -36,7 +36,7 @@ cluster.name: <%=  node[:elasticsearch][:cluster][:name] %>
 # Search pool
 #threadpool.search.type: fixed
 #threadpool.search.size: 20
-threadpool.search.queue_size: 1000
+threadpool.search.queue_size: 3000
 
 # Bulk pool
 #threadpool.bulk.type: fixed
