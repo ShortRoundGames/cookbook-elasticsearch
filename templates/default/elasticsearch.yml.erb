@@ -130,7 +130,7 @@ node.max_local_storage_nodes: 1
 # makes sense to "disable" the distributed features:
 #
 # index.number_of_shards: 1
-# index.number_of_replicas: 0
+index.number_of_replicas: 0
 
 # These settings directly affect the performance of index and search operations
 # in your cluster. Assuming you have enough machines to hold shards and
@@ -397,3 +397,6 @@ http.basic.enabled: <%= (!!node[:elasticsearch][:basic_auth]).to_s %>
 http.basic.user: "<%= node[:elasticsearch][:basic_auth][:user] %>"
 http.basic.password: "<%= node[:elasticsearch][:basic_auth][:password] %>"
 <% end -%>
+
+# Enable shard (re)allocation only for new indices
+cluster.routing.allocation.enable: new_primaries
