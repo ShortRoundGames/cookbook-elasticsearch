@@ -400,3 +400,6 @@ http.basic.password: "<%= node[:elasticsearch][:basic_auth][:password] %>"
 
 # Enable shard (re)allocation only for new indices
 cluster.routing.allocation.enable: new_primaries
+
+# Enable Dynamic Scripting
+script.engine.groovy.inline.update: on
