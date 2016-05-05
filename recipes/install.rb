@@ -62,8 +62,8 @@ bash "install_aws_plugin" do
   user "root"
   cwd "#{node[:elasticsearch][:home_dir]}"
   code <<-EOH
-    bin/plugin -remove elasticsearch/elasticsearch-cloud-aws/#{node[:elasticsearch][:aws_plugin][:version]}
-    bin/plugin -install elasticsearch/elasticsearch-cloud-aws/#{node[:elasticsearch][:aws_plugin][:version]}
+    bin/plugin remove cloud-aws
+    bin/plugin install cloud-aws
   EOH
 end
 
@@ -72,8 +72,8 @@ bash "install_knapsack_plugin" do
   user "root"
   cwd "#{node[:elasticsearch][:home_dir]}"
   code <<-EOH
-    bin/plugin -remove knapsack
-    bin/plugin -install knapsack -url http://xbib.org/repository/org/xbib/elasticsearch/plugin/elasticsearch-knapsack/#{node[:elasticsearch][:knapsack_plugin][:version]}/elasticsearch-knapsack-#{node[:elasticsearch][:knapsack_plugin][:version]}-plugin.zip
+    bin/plugin remove knapsack
+    bin/plugin install http://xbib.org/repository/org/xbib/elasticsearch/plugin/elasticsearch-knapsack/#{node[:elasticsearch][:knapsack_plugin][:version]}/elasticsearch-knapsack-#{node[:elasticsearch][:knapsack_plugin][:version]}-plugin.zip
   EOH
 end
 
@@ -88,4 +88,9 @@ template "#{node['elasticsearch']['dir']}/elasticsearch.pill" do
   source 'elasticsearch.pill.erb'
   mode   '0644'
   owner  'root'
+end
+
+# Create scripts directory
+directory node[:elasticsearch][:path][:conf]/scripts do
+  owner 'root'
 end
