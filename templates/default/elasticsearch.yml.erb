@@ -58,6 +58,8 @@ path.logs: <%= node[:elasticsearch][:path][:logs] %>
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
 # network.host: 192.168.0.1
+network.host: _ec2_,_local_
+
 #
 # Set a custom port for HTTP:
 #
@@ -72,7 +74,7 @@ path.logs: <%= node[:elasticsearch][:path][:logs] %>
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
 # discovery.zen.ping.unicast.hosts: ["host1", "host2"]
-discovery.zen.ping.unicast.hosts: ["<%= @hosts.join('","') %>"]
+# discovery.zen.ping.unicast.hosts: ["<%= @hosts.join('","') %>"]
 
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
