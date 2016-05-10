@@ -91,6 +91,7 @@ template "#{node['elasticsearch']['dir']}/elasticsearch.pill" do
 end
 
 # Create scripts directory
-directory node[:elasticsearch][:path][:conf]/scripts do
-  owner 'root'
+directory "#{node['elasticsearch']['path']['conf']}/scripts" do
+  owner node[:elasticsearch][:user]
+  group node[:elasticsearch][:user]
 end

@@ -3,7 +3,7 @@ Bluepill.application('elasticsearch',
   app.process('elasticsearch') do |process|
     process.working_dir = '<%= node['elasticsearch']['home_dir'] %>'
     process.pid_file = "/tmp/elasticsearch.pid"
-    process.start_command = 'sudo -u elasticsearch <%= node['elasticsearch']['home_dir'] %>/bin/elasticsearch --Xmx 8g --Xms 8g --security.manager.enabled false'
+    process.start_command = 'sudo -u elasticsearch <%= node['elasticsearch']['home_dir'] %>/bin/elasticsearch --Xmx 24g --Xms 24g --security.manager.enabled false'
     process.stop_command = 'kill -SIGTERM {{PID}}'
     process.daemonize = true
     process.stdout = "/data/log/elasticsearch_stdout.log"
