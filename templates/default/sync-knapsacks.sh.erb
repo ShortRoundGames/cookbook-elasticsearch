@@ -7,5 +7,8 @@ export AWS_SECRET_ACCESS_KEY=<%= node[:s3][:secret_key] %>
 # Upload any knapsack archives that are not already on S3
 aws s3 sync /data/knapsacks s3://elk-snapshots/knapsacks
 
+# Move knapsacks from log dir (thanks for nothing Java Security Manager)
+mv /data/log/*.tar.gz /data/knapsacks
+
 # Delete any archives more than 30 days old
 find /data/knapsacks/* -mtime +30 -exec rm {} \;
